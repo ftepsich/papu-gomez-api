@@ -1,4 +1,4 @@
-const rolSql = require('./rol.sql');
+const rolSql = require('./rol.sql.js');
 const createError = require('http-errors');
 const rolController = {};
 
@@ -9,12 +9,12 @@ const rolController = {};
      * @param {CallableFunction} next
      */
 rolController.get = async (req, res, next) => {
-    try {
-        const roles = await rolSql.selectAll();
-        res.send(roles);
-    } catch (error) {
-        next(createError(error, 'No se pudieron listar los roles'));
-    }
+	try {
+		const roles = await rolSql.fetchAll();
+		res.send(roles);
+	} catch (error) {
+		next(createError(error, 'No se pudieron listar los roles'));
+	}
 };
 
 /**
@@ -23,13 +23,13 @@ rolController.get = async (req, res, next) => {
      * @param {CallableFunction} next
      */
 rolController.create = async (req, res, next) => {
-    try {
-        const { rol_tipo, descripcion } = req.body;
-        const rol = await rolSql.insert(rol_tipo, descripcion);
-        res.send(rol);
-    } catch (error) {
-        next(createError(error, 'No se pudo crear un nuevo rol'));
-    }
+	try {
+		const { rol_tipo, descripcion } = req.body;
+		const rol = await rolSql.insert(rol_tipo, descripcion);
+		res.send(rol);
+	} catch (error) {
+		next(createError(error, 'No se pudo crear un nuevo rol'));
+	}
 };
 
 /**
@@ -38,14 +38,14 @@ rolController.create = async (req, res, next) => {
      * @param {CallableFunction} next
      */
 rolController.update = async (req, res, next) => {
-    try {
-        const { rol_tipo, descripcion } = req.body;
-        const id = req.params.id;
-        const rol = await rolSql.update(id, rol_tipo, descripcion);
-        res.send(rol);
-    } catch (error) {
-        next(createError(error, 'No se pudo actualizar el rol'));
-    }
+	try {
+		const { rol_tipo, descripcion } = req.body;
+		const id = req.params.id;
+		const rol = await rolSql.update(id, rol_tipo, descripcion);
+		res.send(rol);
+	} catch (error) {
+		next(createError(error, 'No se pudo actualizar el rol'));
+	}
 };
 
 /**
@@ -54,13 +54,13 @@ rolController.update = async (req, res, next) => {
      * @param {CallableFunction} next
      */
 rolController.removeRol = async (req, res, next) => {
-    try {
-        const id = req.params.id;
-        const rol = await rolSql.deleteRol(id);
-        res.send(rol);
-    } catch (error) {
-        next(createError(error, 'No se pudo eliminar el rol'));
-    }
+	try {
+		const id = req.params.id;
+		const rol = await rolSql.deleteRol(id);
+		res.send(rol);
+	} catch (error) {
+		next(createError(error, 'No se pudo eliminar el rol'));
+	}
 };
 
 module.exports = rolController;

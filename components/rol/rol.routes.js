@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {get, create, update, removeRol } = require('./rol.controller');
+const {get, create, update, removeRol } = require('./rol.controller.js');
 const router = Router();
 
 /*Roles*/

@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const {getPaciente,getPacienteById,createPaciente,updatePaciente,deletePaciente} = require('./paciente.controller');
+const {getPaciente,getPacienteById,createPaciente,updatePaciente,deletePaciente} = require('./paciente.controller.js');
 const router = Router();
 
 /*Pacientes*/
